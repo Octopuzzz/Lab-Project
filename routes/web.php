@@ -37,7 +37,7 @@ Route::middleware(['auth'])->group(function () {
     });
     Route::middleware('user')->group(function () {
         Route::get('/profile', [UserController::class, 'profile'])->name('profile.show');
-        Route::post('/profile', [UserController::class, 'EditProfile'])->name('profile.edit');
+        Route::put('/profile', [UserController::class, 'EditProfile'])->name('profile.edit');
         Route::post('/detail/{product:ProductID}', [CartController::class, 'AddToCart'])->name('add');
         Route::prefix('/MyCart')->group(function () {
             Route::get('', [CartController::class, 'MyCart'])->name('MyCart');
