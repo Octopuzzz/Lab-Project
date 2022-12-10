@@ -44,6 +44,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/{cart:CardID}', [CartController::class, 'RemoveFromCart'])->name('remove');
             Route::get('/{cart:CardID}', [CartController::class, 'EditItemCart'])->name('editCart');
             Route::post('/edit/{cart:CardID}', [CartController::class, 'UpdateItemCart'])->name('updateCart');
+            
         });
     });
 });
