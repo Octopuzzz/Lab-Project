@@ -1,15 +1,21 @@
 @extends('layouts.main')
 
 @section('section')
-@if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
-    <div class="container border px-5 py-4 mt-4 main-section bg-white rounded-4 shadow-lg" style="background-color: #eee">
-        <div class="row mb-3">
-            <img src="https://source.unsplash.com/1600x900/?{{ $user->UserID }}" class="m-auto py-2 img-fluid rounded-circle" alt="" style="width: 200px; height: 200px;">
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
         </div>
+    @endif
+    <div class="container border px-5 py-4 mt-4 main-section bg-white rounded-4 shadow-lg" style="background-color: #eee">
+        @if(!$user->image)
+            <div class="row mb-3">
+                <img src="https://source.unsplash.com/1600x900/?{{ $user->UserID }}" class="m-auto py-2 img-fluid rounded-circle" alt="" style="width: 200px; height: 200px;">
+            </div>
+        @else
+            <div class="row mb-3">
+                <img src="{{ asset('./storage/user_image/'.$user->image) }}" class="m-auto py-2 img-fluid rounded-circle" alt="" style="width: 200px; height: 200px;">
+            </div>
+        @endif
         <form action="{{ route('profile.edit') }}" method="POST" class="row">
             @method('put')
             @csrf
@@ -43,6 +49,14 @@
                 <input type="password" name="current_password" class="form-control rounded-pill" id="password_confirmation">
             </div>
             @error('current_password')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            <div class="col-lg-12 mb-4">
+                <label for="images" class="form-label">Upload Image</label>
+                <input type="file" name="profile_image" class="form-control rounded-pill" id="images">
+            </div>
+            <input type="hidden" name="oldImage" value="{{ $user->image }}">
+            @error('profile_image')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
             <div class="col-lg-12 mb-3">

@@ -11,6 +11,10 @@
                 <div class="alert alert-danger" role="alert">
                     {{ session('message') }}
                 </div>
+            @elseif(session('loginError'))
+                <div class="alert alert-danger">
+                    {{ session('loginError') }}
+                </div>
             @endif
             <div class="col-lg-3 px-2">
                 <img src="https://source.unsplash.com/320x400/?Phone" alt="">

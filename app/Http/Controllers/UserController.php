@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
@@ -27,24 +28,30 @@ class UserController extends Controller
             'address' => 'required|min:5',
             'new_password' => 'nullable|min:5',
             'current_password' => 'required',
+            'profile_image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
         ]);
         if (Hash::check($request->current_password, Auth::user()->password)) {
-            $user = User::where('UserID', auth()->id());
+            $user = User::where('UserID', auth()->id())->first();
+            $user->name = $request->profile_name;
+            $user->email = $request->email;
+            $user->address = $request->address;
             if ($request->new_password) {
                 $password = Hash::make($request->new_password);
-                $user->update([
-                    'name' => $request->profile_name,
-                    'email' => $request->email,
-                    'address' => $request->address,
-                    'password' => $password
-                ]);
-            }else{
-                $user->update([
-                    'name' => $request->profile_name,
-                    'email' => $request->email,
-                    'address' => $request->address,
-                ]);
+                $user->password = $password;
             }
+            if ($request->hasFile('profile_image')) {
+                if ($request->oldImage) {
+                    Storage::delete($request->oldImage);
+                }
+                $user->image = $request->file('profile_image')->store('user_image');
+            }
+            $user->save();
+            // $user->update([
+            //     'name' => $request->profile_name,
+            //     'email' => $request->email,
+            //     'address' => $request->address,
+            //     'password' => $password
+            // ]);
             // User::where('UserID', auth()->id())->update([
             //     'name' => $request->profile_name,
             //     'email' => $request->email,
