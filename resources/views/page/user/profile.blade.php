@@ -13,7 +13,7 @@
             </div>
         @else
             <div class="row mb-3">
-                <img src="{{ asset('./storage/user_image/'.$user->image) }}" class="m-auto py-2 img-fluid rounded-circle" alt="" style="width: 200px; height: 200px;">
+                <img src="{{ asset($user->image) }}" class="m-auto py-2 img-fluid rounded-circle" alt="" style="width: 200px; height: 200px;">
             </div>
         @endif
         <form action="{{ route('profile.edit') }}" method="POST" class="row">
