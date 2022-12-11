@@ -19,7 +19,7 @@ class LoginController extends Controller
     {
         $credentials = $request->validate([
             'email' => 'required|email:dns',
-            'password' => 'required|min:5|max:20'
+            'password' => 'required|min:5|max:30'
         ]);
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials, $request->remember ? true : false)) {
