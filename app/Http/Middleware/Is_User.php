@@ -21,9 +21,7 @@ class Is_User
         if (!Auth::check()) {
             return redirect(route('login'))->with('message', 'You Need To Login First !');
         }
-        if ($request->user()->isAdmin != true) {
-            return $next($request);
-        } else if ($request->user()->isAdmin == true) {
+        if ($request->user()->isAdmin == true) {
             return redirect()->route('home')->with('message', "You Can't Access This Page !");
         }
         return $next($request);

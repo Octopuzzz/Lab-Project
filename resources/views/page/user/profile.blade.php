@@ -13,9 +13,9 @@
             </div>
         @else
             <div class="row mb-3">
-                <img src="{{ asset('storage/'.$user->image) }}" class="m-auto py-2 img-fluid rounded-circle" alt="" style="width: 200px; height: 200px;">
+                <img src="{{ asset('/storage/user-image/default.png') }}" class="m-auto py-2 img-fluid rounded-circle" alt="" style="width: 200px; height: 200px;">
             </div>
-            <h1>{{ asset('storage/'.$user->image) }}</h1>
+            <h1>{{ asset($user->image) }}</h1>
         @endif
         <form action="{{ route('profile.edit') }}" method="POST" class="row">
             @method('put')
