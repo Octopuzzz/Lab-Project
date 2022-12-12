@@ -2,11 +2,8 @@
 
 @section('section')
     <div class="container-fluid py-5" style="background-color: #bec0bc;">
-        <div class="row border border rounded-4 shadow-lg m-auto w-75"style="background-color: #eee;">
-            <div class="col-4">
-                <img src="" alt="">
-            </div>
-            <div class="col-8 p-5">
+        <div class="row rounded-4 shadow-lg m-auto p-0 w-50 overflow-hidden "style="background-color: #eee;">
+            <div class="col-lg-12 p-5">
                     <div class="card-header">
                         <h1>Create An Account</h1>
                     </div>
@@ -72,10 +69,13 @@
                         @error('Agreement')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        <a class="d-block mt-2 text-decoration-none">Don't Have Account? Register Here</a>
+                        <button type="submit" class="btn btn-danger w-100 text-dark">Register</button>
+                        <span class="d-block mt-3 text-center">Have Already an Account?
+                            <u>
+                                <a class="text-decoration-none text-dark" href="{{ route('login') }}"> Login Here</a>
+                            </u>
+                        </span>
                     </form>
-
             </div>
         </div>
     </div>
