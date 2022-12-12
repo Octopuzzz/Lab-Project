@@ -20,7 +20,8 @@ class RegisterController extends Controller
         $request['password'] = Hash::make($request->password);
         $request['isAdmin'] = $request->isAdmin ? true : false;
         if ($request->hasFile('image')) {
-            $request['image'] = $request->file('image')->store('images');
+            $path = $request->file('image')->store('user-image');
+            $request['image'] = $path;
         }
         // dd($request->all(), $request->image);
         User::create($request->all());

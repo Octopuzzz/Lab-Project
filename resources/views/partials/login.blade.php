@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('section')
-    <div class="container-fluid d-flex p-5 align-items-center justify-content-center" style="background-color: #eee; height: 92vh; ">
+    <div class="container-fluid d-flex p-5 align-items-center justify-content-center" style="background-color: #eee; height: 94vh; ">
         <div class="row shadow-lg w-50 mh-100 m-auto p-0 rounded-4 overflow-hidden">
             @if (session()->has('success'))
                 <div class="alert alert-success" role="alert">
@@ -19,7 +19,7 @@
             <div class="col-lg-4 p-0 m-0">
                 <img class="w-100 h-100 " src="{{ asset('storage/images/Register.jpg') }}" alt="">
             </div>
-            <div class="col-lg-8 p-5">
+            <div class="col-lg-8 p-5" style="background-color: #F8F9FA;">
                 <h1>Login</h1>
                 <form method="POST" action="{{ route('login') }}" enctype="multipart/form-data">
                     @csrf
