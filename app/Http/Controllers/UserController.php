@@ -28,7 +28,7 @@ class UserController extends Controller
             'address' => 'required|min:5',
             'new_password' => 'nullable|min:5',
             'current_password' => 'required',
-            'profile_image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
+            'profile_image' => 'nullable|image|mimes:jpg,jpeg,png|max:4096'
         ]);
         if (Hash::check($request->current_password, Auth::user()->password)) {
             $user = User::where('UserID', auth()->id())->first();
@@ -41,10 +41,15 @@ class UserController extends Controller
             }
             if ($request->hasFile('profile_image')) {
                 if ($request->oldImage) {
-                    Storage::delete($request->oldImage);
+                    Storage::delete('user-image/' . $request->oldImage);
                 }
-                $path = $request->file('profile_image')->storeAs('/storage/user_image/', $request->file('profile_image')->getClientOriginalName(), 'public');
-                $user->profile_image = $path;
+                $files = $request->file('profile_image');
+                $fileFullName = $files->getClientOriginalName();
+                $fileName = pathinfo($fileFullName, PATHINFO_FILENAME);
+                $extension = $files->getClientOriginalExtension();
+                $image = $fileName . "-" . time() . "." . $extension;
+                $files->storeAs('user-image', $image);
+                $user->image = $image;
             }
             $user->save();
             // $user->update([
