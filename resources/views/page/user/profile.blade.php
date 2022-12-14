@@ -20,6 +20,7 @@
         <form action="{{ route('profile.edit') }}" method="POST" class="row">
             @method('put')
             @csrf
+            <input type="">
             <div class="col-lg-12 mb-4">
                 <label for="profile-name" class="form-label">Profile Name</label>
                 <input type="text" name="profile_name" class="form-control rounded-pill" id="profile-name" value="{{ $user->name }}">

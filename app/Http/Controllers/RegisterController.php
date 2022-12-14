@@ -20,11 +20,22 @@ class RegisterController extends Controller
         $request['password'] = Hash::make($request->password);
         $request['isAdmin'] = $request->isAdmin ? true : false;
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('user-image');
-            $request['image'] = $path;
+            $files = $request->file('image');
+            $fileFullname = $files->getClientOriginalName();
+            $fileName = pathinfo($fileFullname, PATHINFO_FILENAME);
+            $extension = $files->getClientOriginalExtension();
+            $image = $fileName . "-" . time() . "." . $extension;
+            $files->storeAs('user-image', $image);
         }
-        // dd($request->all(), $request->image);
-        User::create($request->all());
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
+            'isAdmin' => $request->isAdmin,
+            'image' => $image,
+            'address' => $request->address,
+            'gender' => $request->gender
+        ]);
         return redirect(route('login'))->with('success', 'Register Success');
     }
 }

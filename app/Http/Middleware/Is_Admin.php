@@ -17,11 +17,6 @@ class Is_Admin
      */
     public function handle(Request $request, Closure $next)
     {
-
-        if (!Auth::check()) {
-            return redirect(route('login'))->with('message', 'You Need To Login First !');
-        }
-
         if ($request->user()->isAdmin != true) {
             return redirect()->route('home')->with('message', 'You Are Not Admin !');
         }
