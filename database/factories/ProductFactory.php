@@ -19,7 +19,8 @@ class ProductFactory extends Factory
             'description' => $this->faker->paragraph(mt_rand(5, 10)),
             'image' => $this->faker->imageUrl(640, 480, 'cats', true, 'Faker'),
             'year' => $this->faker->numberBetween(2018, 2023),
-            'UserID' => $this->faker->unique()->numberBetween(1, 10),
+            'UserID' => $this->faker->unique()->numberBetween(1, 8),
+            // \'UserID' => $this->faker->unique()->numberBetween(1, 10),
         ];
     }
 }

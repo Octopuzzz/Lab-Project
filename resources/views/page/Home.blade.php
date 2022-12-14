@@ -20,7 +20,7 @@
         @foreach($Products as $Product)
             <div class="col-lg-4 py-3">
                 <div class="card" style="">
-                    <img src="https://source.unsplash.com/1600x900/?{{ $Product->name }}" class="card-img-top " alt="...">
+                    <img src="{{ asset('storage/product-image/'.$Product->image) }}" class="card-img-top img-fluid" alt="..." style="height: 300px;">
                     <div class="card-body">
                         <div class="row">
                             <h5 class="card-title col-lg-8">{{ $Product->name }}</h5>

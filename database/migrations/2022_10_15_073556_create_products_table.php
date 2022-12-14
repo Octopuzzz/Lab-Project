@@ -19,7 +19,6 @@ class CreateProductsTable extends Migration
             $table->string('price');
             $table->string('image');
             $table->text('description');
-            $table->string('image');
             $table->year('year');
             $table->foreignId('UserID');
             $table->timestamps();

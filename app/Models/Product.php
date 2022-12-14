@@ -18,10 +18,6 @@ class Product extends Model
     ];
     public function scopeFilter($query, array $filters)
     {
-        // if (isset($filters['search']) ?? false) {
-        //     return $query->where('name', 'like', '%' . $filters['search'] . '%')
-        //         ->orWhere('description', 'like', '%' . $filters['search'] . '%');
-        // }
         $query->when(
             $filters['search'] ?? false,
             fn ($query, $search) =>
