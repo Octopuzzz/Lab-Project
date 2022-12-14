@@ -20,6 +20,7 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', [ProductController::class, 'index'])->name('home');
+// Route::get('/', [ProductController::class, 'index'])->name('search');
 Route::middleware(['guest'])->group(function () {
     Route::prefix('/login')->group(function () {
         Route::get('', [LoginController::class, 'index']);
@@ -44,7 +45,6 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/{cart:CardID}', [CartController::class, 'RemoveFromCart'])->name('remove');
             Route::get('/{cart:CardID}', [CartController::class, 'EditItemCart'])->name('editCart');
             Route::post('/edit/{cart:CardID}', [CartController::class, 'UpdateItemCart'])->name('updateCart');
-            
         });
     });
 });

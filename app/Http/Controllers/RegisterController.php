@@ -32,7 +32,7 @@ class RegisterController extends Controller
             'email' => $request->email,
             'password' => $request->password,
             'isAdmin' => $request->isAdmin,
-            'image' => $image,
+            'image' => $image ?? 'default.png',
             'address' => $request->address,
             'gender' => $request->gender
         ]);

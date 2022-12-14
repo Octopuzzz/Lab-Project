@@ -25,8 +25,9 @@
                 @endif
             </ul>
             <ul class="d-flex navbar-nav w-100 ps-2 justify-content-between">
-                <form class="d-flex flex-fill" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <form class="d-flex flex-fill" role="search" method="GET" action="{{ route('home') }}">
+                    @csrf
+                    <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
                 <div class="align-self-lg-center nav-item dropdown" style="min-width: 230px;">

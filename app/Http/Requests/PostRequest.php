@@ -31,7 +31,7 @@ class PostRequest extends FormRequest
             'gender' => 'required',
             'Agreement' => 'required',
             'password' => 'required|confirmed|min:5',
-            'profile_image' => 'nullable|image|mimes:jpg,jpeg,png,bmp|max:4096'
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:4096'
         ];
     }
     public function messages()
