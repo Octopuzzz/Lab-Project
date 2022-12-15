@@ -15,6 +15,10 @@
             <div class="col-lg-4 left-side-product-box pb-3">
                 @if ($Product->image)
                     <div style="max-height:500px; overflow:hidden">
+                        <img src="{{ asset('storage/product-image/'.$Product->image) }}" class="border border-0 p-3 img-fluid">
+                    </div>
+                @else
+                    <div style="max-height:500px; overflow:hidden">
                         <img src="https://source.unsplash.com/1600x900/?{{ $Product->name }}" class="border border-0 p-3 img-fluid">
                     </div>
                 @endif

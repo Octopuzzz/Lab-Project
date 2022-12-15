@@ -20,13 +20,13 @@
         @foreach($Products as $Product)
             <div class="col-lg-4 py-3">
                 <div class="card" style="">
-                    <img src="{{ asset('storage/product-image/'.$Product->image) }}" class="card-img-top img-fluid" alt="..." style="height: 300px;">
+                    <img src="{{ asset('storage/product-image/'.$Product->image) }}" class="card-img-top img-fluid" alt="..." style="height: 430px;">
                     <div class="card-body">
                         <div class="row">
                             <h5 class="card-title col-lg-8">{{ $Product->name }}</h5>
                             <p class="col-lg-4 text-lg-end" href="">{{ $Product->year }}</p>
                         </div>
-                        <p class="card-text">${{ $Product->price }}</p>
+                        <p class="card-text">Rp.{{ $Product->price }}</p>
                         <a href="{{ route('product', $Product->ProductID) }}" class="btn btn-primary">View Product</a>
                     </div>
                 </div>

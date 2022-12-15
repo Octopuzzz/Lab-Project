@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\HeaderTransaction;
 use App\Http\Controllers\Controller;
-use App\Models\Cart;
+use App\Models\TransactionDetail;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -54,5 +57,26 @@ class CartController extends Controller
         $cart->TotalPrice = $request->quantity * $cart->Price;
         $cart->save();
         return redirect(route('MyCart'))->with('success', 'Item updated');
+    }
+    public function Checkout($total_price)
+    {
+        $data = Cart::all();
+        if (Auth::check()) {
+            $HeaderTransaction = HeaderTransaction::create([
+                'UserID' => Auth::user()->UserID,
+                'Total_Price' => $total_price,
+                'Status' => 'Pending'
+            ]);
+            foreach ($data as $item) {
+                $DetailTransaction = new TransactionDetail();
+                $DetailTransaction->HeaderID = $HeaderTransaction->HeaderTransactionID;
+                $DetailTransaction->ProductID = $item->ProductID;
+                $DetailTransaction->Quantity = $item->Quantity;
+                $DetailTransaction->Sub_Total = $item->TotalPrice;
+                $DetailTransaction->save();
+            }
+            Cart::truncate();
+        }
+        return redirect(route('MyCart'))->with('success', 'Checkout success !');
     }
 }

@@ -33,6 +33,7 @@
                 <div class="align-self-lg-center nav-item dropdown" style="min-width: 230px;">
                     @if(Auth::check())
                         <a href="" role="button" class="text-decoration-none text-dark px-2" data-bs-toggle="dropdown">
+                            <img src="{{ asset('storage/user-image/'.auth()->user()->image) }}" class="img-fluid rounded-circle overflow-hidden" alt="" style="width: 40px; height: 40px;">
                             {{ Auth::user()->name }}
                             <span><i class="bi bi-caret-down-fill"></i></span>
                         </a>

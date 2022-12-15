@@ -24,12 +24,21 @@
                 </div>
             </div>
         @else
+            @php
+                $total = 0;
+            @endphp
             @foreach ($items as $item)
                 <div class="container border px-5 mt-4 py-2 main-section bg-white rounded-4 shadow-lg" style="background-color: #eee">
                     <div class="row">
-                        <div class="col-lg-4">
-                            <img src="https://source.unsplash.com/1600x900/?{{ $item->name }}" class="border border-0 p-3 img-fluid">
-                        </div>
+                        @if ($item->products[0]->image)
+                            <div class="col-lg-4">
+                                <img src="{{ asset('storage/product-image/'.$item->products[0]->image) }}" class="border border-0 p-3 img-thumbnail">
+                            </div>
+                        @else
+                            <div class="col-lg-4">
+                                <img src="https://source.unsplash.com/1600x900/?{{ $item->name }}" class="border border-0 p-3 img-thumbnail">
+                            </div>
+                        @endif
                         <div class="col-lg-8 py-3">
                             <div class="row">
                                 <div class="col-lg-8 py-3">
@@ -69,7 +78,46 @@
                         </div>
                     </div>
                 </div>
+                @php
+                    $total += $item->TotalPrice;
+                @endphp
             @endforeach
+            <hr class="">
+            <div class="d-flex justify-content-between pe-4 ps-1 py-4">
+                <h3 class="ms-4" name="Total_Price">Total : Rp. {{ $total }}</h3>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Checkout({{ count($items)  }})
+                </button>
+            </div>
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            <form action="{{ route('checkout', $total) }}" method="POST" enctype="multipart/form-data" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                @csrf
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Are You Sure Want To Checkout ?</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <ol>
+                                @foreach ($items as $item)
+                                    <li>
+                                        <span>{{ $item->products[0]->name }}</span>
+                                    </li>
+                                @endforeach
+                            </ol>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         @endif
     </div>
 @endsection
