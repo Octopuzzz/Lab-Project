@@ -22,6 +22,11 @@
                             My Cart
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-decoration-none text-dark" href="{{ route('History') }}">
+                           History
+                        </a>
+                    </li>
                 @endif
             </ul>
             <ul class="d-flex navbar-nav w-100 ps-2 justify-content-between">

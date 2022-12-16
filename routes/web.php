@@ -6,6 +6,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -34,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::middleware('admin')->group(function () {
         Route::get('/Dashboard', [AdminController::class, 'index'])->name('admin');
+        
     });
     Route::middleware('user')->group(function () {
         Route::get('/profile', [UserController::class, 'profile'])->name('profile.show');
@@ -41,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/detail/{product:ProductID}', [CartController::class, 'AddToCart'])->name('add');
         Route::prefix('/MyCart')->group(function () {
             Route::get('', [CartController::class, 'MyCart'])->name('MyCart');
+            Route::get('/History', [TransactionController::class,'index'])->name('History');
             Route::post('/{total_price}', [CartController::class, 'Checkout'])->name('checkout');
             Route::post('/{cart:CardID}', [CartController::class, 'RemoveFromCart'])->name('remove');
             Route::get('/{cart:CardID}', [CartController::class, 'EditItemCart'])->name('editCart');

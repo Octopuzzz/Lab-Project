@@ -6,7 +6,7 @@
             {{ session('success') }}
         </div>
     @endif
-    <div class="container border px-5 py-4 mt-4 main-section bg-white rounded-4 shadow-lg" style="background-color: #eee">
+    <div class="container border px-5 py-4 my-4 main-section bg-white rounded-4 shadow-lg" style="background-color: #eee">
         @if(!$user->image)
             <div class="row mb-3">
                 <img src="https://source.unsplash.com/1600x900/?{{ $user->UserID }}" class="m-auto py-2 img-fluid rounded-circle" alt="" style="width: 200px; height: 200px;">
