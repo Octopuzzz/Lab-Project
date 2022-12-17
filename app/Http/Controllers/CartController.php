@@ -60,8 +60,23 @@ class CartController extends Controller
     }
     public function Checkout($total_price)
     {
+        $product = null;
+        $ErrorItem = [];
+        $flag = true;
         $data = Cart::all();
         if (Auth::check()) {
+            foreach ($data as $item) {
+                $product = Product::where('ProductID', $item->ProductID)->first();
+                if ($product == null) {
+                    return redirect(route('MyCart'))->with('message', "You Can't select unlisted item !");
+                } else if ($product->stock < $item->Quantity) {
+                    $ErrorItem[] = $product->name;
+                    $flag = false;
+                }
+            }
+            if (!$flag) {
+                return redirect(route('MyCart'))->with('message', "You Can't select item that out of stock !")->with('ErrorItem', $ErrorItem);
+            }
             $HeaderTransaction = HeaderTransaction::create([
                 'UserID' => Auth::user()->UserID,
                 'Total_Price' => $total_price,
@@ -69,6 +84,9 @@ class CartController extends Controller
             ]);
             foreach ($data as $item) {
                 $DetailTransaction = new TransactionDetail();
+                $product = Product::where('ProductID', $item->ProductID)->first();
+                $product->stock -= $item->Quantity;
+                $product->save();
                 $DetailTransaction->HeaderID = $HeaderTransaction->HeaderTransactionID;
                 $DetailTransaction->ProductID = $item->ProductID;
                 $DetailTransaction->Quantity = $item->Quantity;

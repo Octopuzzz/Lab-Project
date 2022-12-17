@@ -39,7 +39,7 @@
                     @enderror
                     <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input" name="remember" id="Remember">
-                        <label class="form-check-label" for="Remember">Check me out</label>
+                        <label class="form-check-label" for="Remember">Remember me</label>
                     </div>
                     <button type="submit" class="btn btn-danger w-100">Login</button>
                     <a class="d-block mt-2 text-decoration-none" href="{{ route('register') }}">Don't Have Account? Register Here</a>

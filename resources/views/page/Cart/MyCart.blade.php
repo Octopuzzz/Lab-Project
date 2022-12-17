@@ -6,6 +6,17 @@
             <div class="alert alert-success">
                 {{ session('success') }}
             </div>
+        @elseif(session('message'))
+            <div class="alert alert-danger">
+                {{ session('message') }}
+                @if(session('ErrorItem'))
+                    <ol class="">
+                        @foreach (session('ErrorItem') as $item)
+                            <li class="px-2">{{ $item }}</li>
+                        @endforeach
+                    </ol>
+                @endif
+            </div>
         @endif
         @if(count($items) == 0)
         <h1 class="mt-4">
@@ -89,11 +100,6 @@
                     Checkout({{ count($items)  }})
                 </button>
             </div>
-            @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
             <form action="{{ route('checkout', $total) }}" method="POST" enctype="multipart/form-data" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 @csrf
                 <div class="modal-dialog">

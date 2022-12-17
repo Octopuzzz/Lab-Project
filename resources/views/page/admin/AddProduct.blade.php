@@ -1,8 +1,8 @@
 @extends('layouts.main')
 
 @section('section')
-    <div class="container-fluid py-5" style="background-color: #bec0bc;">
-        <div class="row rounded-4 shadow-lg m-auto p-0 w-50 overflow-hidden "style="background-color: #eee;">
+    <div class="container-fluid py-5 d-flex" style="background-color: #eee; height: 94vh;">
+        <div class="row rounded-4 shadow-lg d-flex m-auto p-0 w-50 overflow-hidden">
             <div class="col-lg-12 p-5" style="background-color: #F8F9FA;">
                     <div class="card-header">
                         <h1>Create An Product</h1>

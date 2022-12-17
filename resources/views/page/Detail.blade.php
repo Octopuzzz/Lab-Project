@@ -35,7 +35,13 @@
                             <hr class="p-0 m-0">
                         </div>
                         <div class="col-lg-12 pt-2">
-                            <h5>{{ $Product->year }}</h5>
+                            <div class="d-flex justify-content-between">
+                                <h5>Released at : {{ $Product->year }}</h5>
+                                <h5 class="">Stock : <span class="
+                                    @if($Product->stock < 1)
+                                    text-danger
+                                    @endif">{{ $Product->stock }}</span></h5>
+                            </div>
                             <span>{!! $Product->description !!}</span>
                             <hr >
                         </div>
@@ -46,9 +52,13 @@
                                     @csrf
                                     <div class="row">
                                         <div class="col-lg-12 mb-2">
-                                            <input type="number" class="form-control text-center" name="quantity" min="1" value="1">
+                                            <input type="number" class="form-control text-center" name="quantity" min="1" max="{{ $Product->stock }}" value="1">
                                         </div>
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-12"
+                                        @if ($Product->stock < 1)
+                                             disabled
+                                        @endif
+                                        >
                                             <button type="submit" class="btn btn-success w-100">Add to Cart</button>
                                         </div>
                                     </div>
