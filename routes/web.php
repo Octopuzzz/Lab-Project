@@ -35,7 +35,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::middleware('admin')->group(function () {
         Route::get('/Dashboard', [AdminController::class, 'index'])->name('admin');
-        
+        Route::delete('/detail/{product:ProductID}', [ProductController::class, 'removeProduct'])->name('removeProduct');
+        Route::delete('/dashboard/{product:ProductID}', [ProductController::class, 'removeProductDashBoard'])->name('removeProduct.dashboard');
+        Route::get('/dashboard/add',[ProductController::class, 'addProduct'])->name('addProduct');
+        Route::post('/dashboard/add',[ProductController::class, 'storeProduct'])->name('storeProduct');
+        Route::get('/dashboard/{product:ProductID}',[ProductController::class, 'editProduct'])->name('editProduct');
     });
     Route::middleware('user')->group(function () {
         Route::get('/profile', [UserController::class, 'profile'])->name('profile.show');
@@ -43,7 +47,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/detail/{product:ProductID}', [CartController::class, 'AddToCart'])->name('add');
         Route::prefix('/MyCart')->group(function () {
             Route::get('', [CartController::class, 'MyCart'])->name('MyCart');
-            Route::get('/History', [TransactionController::class,'index'])->name('History');
+            Route::get('/History', [TransactionController::class, 'index'])->name('History');
             Route::post('/{total_price}', [CartController::class, 'Checkout'])->name('checkout');
             Route::post('/{cart:CardID}', [CartController::class, 'RemoveFromCart'])->name('remove');
             Route::get('/{cart:CardID}', [CartController::class, 'EditItemCart'])->name('editCart');

@@ -62,7 +62,7 @@
                                         <a href="{{ route('home') }}" class="btn btn-danger w-100">Back</a>
                                     </div>
                                     <div class="col-lg-6">
-                                        <form action="/dashboard/posts/{{ $Product->slug }}" method="post">
+                                        <form action="{{ route('removeProduct', $Product->ProductID) }}" method="post">
                                             @method('delete')
                                             @csrf
                                             <button class="btn btn-danger form-control" onclick="return confirm('Are you sure delete this product?')">

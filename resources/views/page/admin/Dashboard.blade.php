@@ -11,7 +11,8 @@
                     <th colspan="4">Product Name</th>
                     <th colspan="5">Product Description</th>
                     <th colspan="4">Product Price</th>
-                    <th colspan="3">Action</th>
+                    <th colspan="4">Product Stock</th>
+                    <th colspan="3" class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,15 +36,26 @@
                         <th colspan="4">
                             {{ $product->price }}
                         </th>
-                        <th colspan="3">
-                            <button class="btn btn-primary">Update</button>
-                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-product="{{ $product->ProductID }}" data-bs-target="#ModalDelete">Delete</button>
+                        <th colspan="4">
+                            {{ $product->stock }}
+                        </th>
+                        <th scope="row" class="">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <form action="" class="me-2 p-0">
+                                    <button class="btn btn-primary">Update</button>
+                                </form>
+                                <form action="{{ route('removeProduct.dashboard',$product->ProductID) }}" onclick="return confirm('Are you sure delete this product?')" method="POST" class="p-0 m-0">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="btn btn-danger" >Delete</button>
+                                </form>
+                            </div>
                         </th>
                     </tr>
                 @endforeach
             </tbody>
         </table>
-        <div class="modal fade" id="ModalDelete" tabindex="-1" aria-hidden="true">
+        {{-- <div class="modal fade" id="ModalDelete" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                 <div class="modal-header">
@@ -66,6 +78,6 @@
                 </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 @endsection

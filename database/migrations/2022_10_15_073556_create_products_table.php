@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('image');
             $table->text('description');
             $table->year('year');
+            $table->bigInteger('stock')->default(10);
             $table->foreignId('UserID');
             $table->timestamps();
         });

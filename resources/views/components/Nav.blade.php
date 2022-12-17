@@ -12,7 +12,7 @@
                             Manage Products
                         </a>
                         <ul class="dropdown-menu dropdown">
-                            <li><a class="dropdown-item" href="#">Add Products</a></li>
+                            <li><a class="dropdown-item" href="{{ route('addProduct') }}">Add Products</a></li>
                             <li><a class="dropdown-item" href="{{ route('admin') }}">Manage Products</a></li>
                         </ul>
                     </li>
