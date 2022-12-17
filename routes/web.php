@@ -37,13 +37,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/Dashboard', [AdminController::class, 'index'])->name('admin');
         Route::delete('/detail/{product:ProductID}', [ProductController::class, 'removeProduct'])->name('removeProduct');
         Route::delete('/dashboard/{product:ProductID}', [ProductController::class, 'removeProductDashBoard'])->name('removeProduct.dashboard');
-        Route::get('/dashboard/add',[ProductController::class, 'addProduct'])->name('addProduct');
-        Route::post('/dashboard/add',[ProductController::class, 'storeProduct'])->name('storeProduct');
-        Route::get('/dashboard/{product:ProductID}',[ProductController::class, 'editProduct'])->name('editProduct');
+        Route::get('/dashboard/add', [ProductController::class, 'addProduct'])->name('addProduct');
+        Route::post('/dashboard/add', [ProductController::class, 'storeProduct'])->name('storeProduct');
+        Route::get('/dashboard/{product:ProductID}', [ProductController::class, 'editProduct'])->name('editProduct');
     });
     Route::middleware('user')->group(function () {
-        Route::get('/profile', [UserController::class, 'profile'])->name('profile.show');
-        Route::put('/profile', [UserController::class, 'EditProfile'])->name('profile.edit');
         Route::post('/detail/{product:ProductID}', [CartController::class, 'AddToCart'])->name('add');
         Route::prefix('/MyCart')->group(function () {
             Route::get('', [CartController::class, 'MyCart'])->name('MyCart');
@@ -54,5 +52,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/edit/{cart:CardID}', [CartController::class, 'UpdateItemCart'])->name('updateCart');
         });
     });
+    Route::get('/profile', [UserController::class, 'profile'])->name('profile.show');
+    Route::put('/profile', [UserController::class, 'EditProfile'])->name('profile.edit');
 });
 Route::get('/detail/{product:ProductID}', [ProductController::class, 'show'])->name('product');
