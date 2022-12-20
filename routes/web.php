@@ -40,6 +40,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard/add', [ProductController::class, 'addProduct'])->name('addProduct');
         Route::post('/dashboard/add', [ProductController::class, 'storeProduct'])->name('storeProduct');
         Route::get('/dashboard/{product:ProductID}', [ProductController::class, 'editProduct'])->name('editProduct');
+        Route::put('/dashboard/{product:ProductID}', [ProductController::class, 'storeEditProduct'])->name('store.editProduct');
     });
     Route::middleware('user')->group(function () {
         Route::post('/detail/{product:ProductID}', [CartController::class, 'AddToCart'])->name('add');

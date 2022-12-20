@@ -37,10 +37,14 @@
                         <div class="col-lg-12 pt-2">
                             <div class="d-flex justify-content-between">
                                 <h5>Released at : {{ $Product->year }}</h5>
-                                <h5 class="">Stock : <span class="
-                                    @if($Product->stock < 1)
-                                    text-danger
-                                    @endif">{{ $Product->stock }}</span></h5>
+                                <h5 class="">Stock :
+                                    <span class="
+                                        @if($Product->stock < 1)
+                                            text-danger
+                                        @endif">
+                                        {{ $Product->stock }}
+                                    </span>
+                                </h5>
                             </div>
                             <span>{!! $Product->description !!}</span>
                             <hr >

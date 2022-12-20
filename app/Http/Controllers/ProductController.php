@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -70,5 +71,48 @@ class ProductController extends Controller
         $product->stock = $request->Stock;
         $product->save();
         return redirect(route('admin'))->with('success', 'Product added');
+    }
+    public function editProduct(Product $product)
+    {
+        return view('page.admin.editProduct', [
+            'Product' => $product,
+            'title' => 'Edit Product'
+        ]);
+    }
+    public function storeEditProduct(Request $request, Product $product)
+    {
+
+        $request->validate([
+            'ProductName' => 'required',
+            'ProductPrice' => 'required',
+            'ProductDescription' => 'required',
+            'image' => 'image|mimes:jpg,jpeg,png|max:4096',
+            'ProductDescription' => 'required',
+            'Stock' => 'required|min:1',
+            'Year' => 'required'
+        ]);
+        // Image
+        $Product = Product::where('ProductID', $product->ProductID)->first();
+        if ($request->has('image')) {
+            if ($product->image != null) {
+                Storage::delete('product-image/' . $product->image);
+            }
+            $files = $request->file('image');
+            $fileFullName = $files->getClientOriginalName();
+            $fileName = pathinfo($fileFullName, PATHINFO_FILENAME);
+            $fileExtension = $files->getClientOriginalExtension();
+            $fileToStore = $fileName . '-' . time() . '.' . $fileExtension;
+            $files->storeAs('product-image', $fileToStore);
+            $Product->image = $fileToStore;
+        }
+        // Store To DB
+        $Product->name = $request->ProductName;
+        $Product->price = $request->ProductPrice;
+        $Product->stock = $request->Stock;
+        $Product->year = $request->Year;
+        $Product->description = $request->ProductDescription;
+        $Product->UserID = auth()->user()->UserID;
+        $Product->save();
+        return redirect(route('admin'))->with('success', 'Product edited');
     }
 }

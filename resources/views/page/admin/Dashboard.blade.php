@@ -36,12 +36,16 @@
                         <th colspan="4">
                             {{ $product->price }}
                         </th>
-                        <th colspan="4">
+                        <th colspan="4" class="
+                        @if($product->stock < 1)
+                            text-danger
+                        @endif">
                             {{ $product->stock }}
                         </th>
                         <th scope="row" class="">
                             <div class="d-flex justify-content-center align-items-center">
-                                <form action="" class="me-2 p-0">
+                                <form action="{{ route('editProduct',$product->ProductID) }}" class="me-2 p-0" method="GET" enctype="multipart/form-data">
+                                    @csrf
                                     <button class="btn btn-primary">Update</button>
                                 </form>
                                 <form action="{{ route('removeProduct.dashboard',$product->ProductID) }}" onclick="return confirm('Are you sure delete this product?')" method="POST" class="p-0 m-0">
