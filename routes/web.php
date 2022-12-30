@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TransactionController;
-use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,8 @@ Route::middleware(['guest'])->group(function () {
         Route::post('', [RegisterController::class, 'store'])->name('register');
     });
 });
+Route::get('/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
+Route::get('/google/callback', [GoogleController::class, 'kenapaGakBisa'])->name('google.callback');
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::middleware('admin')->group(function () {
