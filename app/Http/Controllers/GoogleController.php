@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -13,7 +13,6 @@ class GoogleController extends Controller
     {
         return Socialite::driver('google')->redirect();
     }
-
     public function kenapaGakBisa()
     {
         try {

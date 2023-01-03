@@ -81,7 +81,6 @@ class ProductController extends Controller
     }
     public function storeEditProduct(Request $request, Product $product)
     {
-
         $request->validate([
             'ProductName' => 'required',
             'ProductPrice' => 'required',

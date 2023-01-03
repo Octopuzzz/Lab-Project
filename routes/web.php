@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\GithubController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
@@ -32,6 +33,8 @@ Route::middleware(['guest'])->group(function () {
         Route::post('', [RegisterController::class, 'store'])->name('register');
     });
 });
+Route::get('/github', [GithubController::class, 'redirectToGithub'])->name('github.login');
+Route::get('/github/callback', [GithubController::class, 'handleGithubCallback'])->name('github.callback');
 Route::get('/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
 Route::get('/google/callback', [GoogleController::class, 'kenapaGakBisa'])->name('google.callback');
 Route::middleware(['auth'])->group(function () {

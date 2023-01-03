@@ -44,7 +44,7 @@
                     <button type="submit" class="btn btn-danger w-100">Login</button>
                     <div class="d-flex justify-content-center py-2">
                         <a href="{{ route('google.login') }}" class="btn btn-danger mx-1">Google +</a>
-                        <a class="btn btn-secondary mx-1">GitHub</a>
+                        <a href="{{ route('github.login') }}" class="btn btn-secondary mx-1">GitHub</a>
                         <a class="btn btn-primary mx-1">FaceBook</a>
                     </div>
                     <a class="d-block mt-2 text-decoration-none" href="{{ route('register') }}">Don't Have Account? Register Here</a>

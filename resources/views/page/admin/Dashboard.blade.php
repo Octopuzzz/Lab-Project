@@ -59,29 +59,5 @@
                 @endforeach
             </tbody>
         </table>
-        {{-- <div class="modal fade" id="ModalDelete" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Are You Sure Want Delete This Product ?</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-2">
-                            <img src="{{ asset('storage/product-image/'. $product->image ) }}" class="" alt="" style="width: 100px;">
-                        </div>
-                        <div class="col-lg-10 m-auto">
-                            <h3>{{ $product->name }}</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-success">Continue</button>
-                </div>
-                </div>
-            </div>
-        </div> --}}
     </div>
 @endsection
