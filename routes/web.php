@@ -33,10 +33,6 @@ Route::middleware(['guest'])->group(function () {
         Route::post('', [RegisterController::class, 'store'])->name('register');
     });
 });
-Route::get('/github', [GithubController::class, 'redirectToGithub'])->name('github.login');
-Route::get('/github/callback', [GithubController::class, 'handleGithubCallback'])->name('github.callback');
-Route::get('/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
-Route::get('/google/callback', [GoogleController::class, 'kenapaGakBisa'])->name('google.callback');
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::middleware('admin')->group(function () {
@@ -63,3 +59,8 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/profile', [UserController::class, 'EditProfile'])->name('profile.edit');
 });
 Route::get('/detail/{product:ProductID}', [ProductController::class, 'show'])->name('product');
+Route::get('/github', [GithubController::class, 'redirectToGithub'])->name('github.login');
+Route::get('/github/callback', [GithubController::class, 'handleGithubCallback'])->name('github.callback');
+Route::get('/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
+Route::get('/google/callback', [GoogleController::class, 'kenapaGakBisa'])->name('google.callback');
+

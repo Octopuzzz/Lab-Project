@@ -16,7 +16,7 @@ class CreateCartsTable extends Migration
         Schema::create('carts', function (Blueprint $table) {
             $table->id('CardID');
             $table->foreignId('UserID')->constrained('users', 'UserID');
-            $table->foreignId('ProductID');
+            $table->foreignId('ProductID')->constrained('products', 'ProductID')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('Quantity');
             $table->integer('Price');
             $table->unsignedBigInteger('TotalPrice');

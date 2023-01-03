@@ -15,8 +15,8 @@ class CreateTransactionDetailsTable extends Migration
     {
         Schema::create('transaction_details', function (Blueprint $table) {
             $table->id('TransactionDetailID');
-            $table->foreignId('HeaderID')->constrained('header_transactions', 'HeaderTransactionID');
-            $table->foreignId('ProductID')->constrained('products', 'ProductID');
+            $table->foreignId('HeaderID')->constrained('header_transactions', 'HeaderTransactionID')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('ProductID')->constrained('products', 'ProductID')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('Quantity');
             $table->string('Sub_Total');
             $table->timestamps();
